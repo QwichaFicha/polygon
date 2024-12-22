@@ -1,0 +1,23 @@
+class Solution {
+public:
+    long long countOperationsToEmptyArray(vector<int>& nums) {
+
+        int n = size(nums);
+        std:: vector <int> pos(n);
+
+        for (int i = 0; i < n; ++i)
+            pos[i] = i;
+
+        std::sort(pos.begin(), pos.end(), [&nums](int i, int j) {
+            return nums[i] < nums[j];
+        });
+
+        long result = n;
+
+        for (int i = 1; i < n; ++i)
+            if (pos[i] < pos[i - 1])
+                result += n - i;
+                
+        return result;
+    }
+};
